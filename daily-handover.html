@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Handover</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-category="daily-handover">
+  <a class="back-link" href="index.html">&larr; Home</a>
+  <h2>Daily Handover</h2>
+  <form id="handover-form" class="handover-form">
+    <label>Event
+      <input type="text" id="event-input" placeholder="Event" required>
+    </label>
+    <label>Comments
+      <input type="text" id="comments-input" placeholder="Comments" required>
+    </label>
+    <label>Date
+      <input type="date" id="date-input" required>
+    </label>
+    <label>Shift
+      <input type="text" id="shift-input" placeholder="Shift" required>
+    </label>
+    <label>Agent
+      <input type="text" id="agent-input" placeholder="Agent" required>
+    </label>
+    <button type="submit">Add</button>
+  </form>
+  <table id="handover-table" class="delivery-table">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Comments</th>
+        <th>Date</th>
+        <th>Shift</th>
+        <th>Agent</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Entries will be inserted here -->
+    </tbody>
+  </table>
+  <script src="daily-handover.js"></script>
+</body>
+</html>
