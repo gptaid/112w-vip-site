@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Vendor List</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    label, input { display: block; margin-top: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    .back-button { display: inline-block; margin-bottom: 10px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-button">← Back</a>
+  <h1>Vendor List 🧾</h1>
+
+  <form id="vendorForm">
+    <label>Company</label><input type="text" id="company">
+    <label>First Name</label><input type="text" id="name">
+    <label>Last Name</label><input type="text" id="lastname">
+    <label>Position</label><input type="text" id="position">
+    <label>Contact Number</label><input type="text" id="contact">
+    <label><input type="checkbox" id="nda"> NDA Signed</label>
+    <button type="submit">Save Entry</button>
+  </form>
+
+  <table id="vendorTable">
+    <thead>
+      <tr><th>Company</th><th>First Name</th><th>Last Name</th><th>Position</th><th>Contact</th><th>NDA</th><th>Actions</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const supabase = window.supabase.createClient('https://tznpnddwklhisoukpjyt.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6bnBuZGR3a2xoaXNvdWtwanl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzNjkyNTEsImV4cCI6MjA2ODk0NTI1MX0.L9WiswlsN1f64U0ucyPYr0g1s-fSeHIda3xw_jIB-44');
+
+    async function loadVendors() {
+      const { data, error } = await supabase.from('vendor_list').select('*');
+      const tbody = document.querySelector("#vendorTable tbody");
+      tbody.innerHTML = "";
+      data.forEach(v => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${v.company}</td>
+          <td>${v.name}</td>
+          <td>${v.lastname}</td>
+          <td>${v.position}</td>
+          <td>${v.contact}</td>
+          <td>${v.nda ? "Signed" : "Not Signed"}</td>
+          <td>
+            <button onclick="deleteVendor(${v.id})">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    async function deleteVendor(id) {
+      await supabase.from('vendor_list').delete().eq('id', id);
+      loadVendors();
+    }
+
+    document.getElementById('vendorForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const newVendor = {
+        company: document.getElementById('company').value,
+        name: document.getElementById('name').value,
+        lastname: document.getElementById('lastname').value,
+        position: document.getElementById('position').value,
+        contact: document.getElementById('contact').value,
+        nda: document.getElementById('nda').checked
+      };
+      await supabase.from('vendor_list').insert([newVendor]);
+      this.reset();
+      loadVendors();
+    });
+
+    loadVendors();
+  </script>
+</body>
+</html>
