@@ -14,10 +14,10 @@
       <label>Company</label>
       <input type="text" id="company" placeholder="Company Name">
 
-      <label>Name</label>
+      <label>First Name</label>
       <input type="text" id="name" placeholder="First Name">
 
-      <label>Lastname</label>
+      <label>Last Name</label>
       <input type="text" id="lastname" placeholder="Last Name">
 
       <label>Position</label>
@@ -45,8 +45,8 @@
 
         let html = `<h3>Saved Vendors:</h3><table border="1" cellpadding="5"><tr>
                       <th>Company</th>
-                      <th>Name</th>
-                      <th>Lastname</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
                       <th>Position</th>
                       <th>Contact Number</th>
                       <th>NDA</th>
@@ -55,7 +55,7 @@
         vendors.forEach(v => {
           html += `<tr>
                     <td>${v.company}</td>
-                    <td>${v.name}</td>
+                    <td>${v.firstname}</td>
                     <td>${v.lastname}</td>
                     <td>${v.position}</td>
                     <td>${v.contact}</td>
