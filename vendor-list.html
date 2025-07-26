@@ -8,88 +8,86 @@
 <body>
   <div class="container">
     <a href="index.html" class="back-button">← Back</a>
-    <h1>Vendor List</h1>
+    <h1>Vendor List 🧾</h1>
 
     <form id="vendorForm" class="delivery-form">
       <label>Company</label>
-      <input type="text" id="company" required>
+      <input type="text" id="company" placeholder="Company Name">
 
       <label>Name</label>
-      <input type="text" id="name" required>
+      <input type="text" id="name" placeholder="First Name">
 
-      <label>Last-Name</label>
-      <input type="text" id="lastname" required>
+      <label>Lastname</label>
+      <input type="text" id="lastname" placeholder="Last Name">
 
       <label>Position</label>
-      <input type="text" id="position" required>
+      <input type="text" id="position" placeholder="Position">
 
       <label>Contact Number</label>
-      <input type="text" id="contact" required>
+      <input type="text" id="contact" placeholder="(###) ###-####">
 
       <label>
-  <input type="checkbox" id="nda"> NDA Signed
-</label>
+        <input type="checkbox" id="nda"> NDA Signed
+      </label>
 
-
-      <button type="submit">Add Vendor</button>
+      <button type="submit">Save Entry</button>
     </form>
 
-    <table id="vendorTable">
-      <thead>
-        <tr>
-          <th>Company</th>
-          <th>   First Name</th>
-          <th>   Last Name</th>
-          <th>Position</th>
-          <th>Contact Number</th>
-          <th>NDA</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+    <div id="vendorLog" style="margin-top: 2rem;"></div>
 
-  <script>
-    const form = document.getElementById('vendorForm');
-    const tableBody = document.querySelector('#vendorTable tbody');
+    <script>
+      const form = document.getElementById('vendorForm');
+      const vendorLog = document.getElementById('vendorLog');
 
-    function loadVendors() {
-      const vendors = JSON.parse(localStorage.getItem('vendors')) || [];
-      tableBody.innerHTML = '';
-      vendors.forEach(vendor => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${vendor.company}</td>
-          <td>${vendor.name}</td>
-          <td>${vendor.lastname}</td>
-          <td>${vendor.position}</td>
-          <td>${vendor.contact}</td>
-          <td>${vendor.nda}</td>
-        `;
-        tableBody.appendChild(row);
+      function loadVendors() {
+        const vendors = JSON.parse(localStorage.getItem('vendorList')) || [];
+        if (vendors.length === 0) return;
+
+        let html = `<h3>Saved Vendors:</h3><table border="1" cellpadding="5"><tr>
+                      <th>Company</th>
+                      <th>Name</th>
+                      <th>Lastname</th>
+                      <th>Position</th>
+                      <th>Contact Number</th>
+                      <th>NDA</th>
+                    </tr>`;
+
+        vendors.forEach(v => {
+          html += `<tr>
+                    <td>${v.company}</td>
+                    <td>${v.name}</td>
+                    <td>${v.lastname}</td>
+                    <td>${v.position}</td>
+                    <td>${v.contact}</td>
+                    <td>${v.nda}</td>
+                  </tr>`;
+        });
+
+        html += `</table>`;
+        vendorLog.innerHTML = html;
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const newVendor = {
+          company: document.getElementById('company').value,
+          name: document.getElementById('name').value,
+          lastname: document.getElementById('lastname').value,
+          position: document.getElementById('position').value,
+          contact: document.getElementById('contact').value,
+          nda: document.getElementById('nda').checked ? 'Signed' : 'Not Signed'
+        };
+
+        const vendors = JSON.parse(localStorage.getItem('vendorList')) || [];
+        vendors.push(newVendor);
+        localStorage.setItem('vendorList', JSON.stringify(vendors));
+        loadVendors();
+        form.reset();
       });
-    }
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const vendor = {
-        company: document.getElementById('company').value,
-        name: document.getElementById('name').value,
-        lastname: document.getElementById('lastname').value,
-        position: document.getElementById('position').value,
-        contact: document.getElementById('contact').value,
-        nda: document.getElementById('nda').value
-      };
-
-      const vendors = JSON.parse(localStorage.getItem('vendors')) || [];
-      vendors.push(vendor);
-      localStorage.setItem('vendors', JSON.stringify(vendors));
-      form.reset();
       loadVendors();
-    });
-
-    loadVendors();
-  </script>
+    </script>
+  </div>
 </body>
 </html>
-
