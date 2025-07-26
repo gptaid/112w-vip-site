@@ -37,9 +37,13 @@
       text-decoration: none;
       border-radius: 4px;
     }
+    .form-actions {
+      margin-top: 10px;
+      text-align: center;
+    }
     button {
-      padding: 4px 10px;
-      margin: 2px;
+      padding: 5px 12px;
+      margin: 5px;
     }
   </style>
 </head>
@@ -49,7 +53,7 @@
 
 <h2>CAMERA LOG</h2>
 
-<!-- Form Row -->
+<!-- Form Inputs -->
 <table>
   <thead>
     <tr>
@@ -59,7 +63,6 @@
       <th>Action Taken</th>
       <th>Agent</th>
       <th>Resolution</th>
-      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -70,12 +73,15 @@
       <td><textarea id="action" rows="2"></textarea></td>
       <td><input type="text" id="agent" /></td>
       <td><textarea id="resolution" rows="2"></textarea></td>
-      <td><button onclick="addEntry()">Save</button></td>
     </tr>
   </tbody>
 </table>
 
-<!-- Saved Rows -->
+<div class="form-actions">
+  <button onclick="addEntry()">Save</button>
+</div>
+
+<!-- Displayed Entries -->
 <table id="logTable">
   <thead>
     <tr>
@@ -85,7 +91,7 @@
       <th>Action Taken</th>
       <th>Agent</th>
       <th>Resolution</th>
-      <th>Actions</th>
+      <th></th>
     </tr>
   </thead>
   <tbody></tbody>
@@ -115,7 +121,6 @@ function addEntry() {
     </td>
   `;
 
-  // Clear form
   document.getElementById("date").value = "";
   document.getElementById("camera").value = "";
   document.getElementById("issue").value = "";
@@ -125,20 +130,18 @@ function addEntry() {
 }
 
 function editRow(btn) {
-  const row = btn.parentElement.parentElement;
-  const cells = row.querySelectorAll("td");
-  document.getElementById("date").value = cells[0].innerText;
-  document.getElementById("camera").value = cells[1].innerText;
-  document.getElementById("issue").value = cells[2].innerText;
-  document.getElementById("action").value = cells[3].innerText;
-  document.getElementById("agent").value = cells[4].innerText;
-  document.getElementById("resolution").value = cells[5].innerText;
-  row.remove(); // Remove row to re-save after edit
+  const row = btn.closest("tr").children;
+  document.getElementById("date").value = row[0].innerText;
+  document.getElementById("camera").value = row[1].innerText;
+  document.getElementById("issue").value = row[2].innerText;
+  document.getElementById("action").value = row[3].innerText;
+  document.getElementById("agent").value = row[4].innerText;
+  document.getElementById("resolution").value = row[5].innerText;
+  btn.closest("tr").remove();
 }
 
 function deleteRow(btn) {
-  const row = btn.parentElement.parentElement;
-  row.remove();
+  btn.closest("tr").remove();
 }
 </script>
 
