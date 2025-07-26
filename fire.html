@@ -1,79 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Fire Info</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fire - 112W VIP Portal</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="container">
-    <a href="index.html" class="back-button">← Back</a>
-    <h1>Fire 🚒</h1>
-    <p>This page will display fire department or emergency info as needed.</p>
-  </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Fire Info</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="container">
-    <a href="index.html" class="back-button">← Back</a>
-    <h1>Fire 🚒</h1>
-
-    <form id="fireForm" class="delivery-form">
-      <label>Department Name</label>
-      <input type="text" id="fireName" placeholder="Enter Fire Dept. Name">
-
-      <label>Phone Number</label>
-      <input type="text" id="firePhone" placeholder="Enter Phone Number">
-
-      <label>Notes</label>
-      <input type="text" id="fireNotes" placeholder="Enter Notes">
-
-      <button type="submit">Save Info</button>
-    </form>
-
-    <div id="fireSaved" style="margin-top: 2rem;"></div>
-
-    <script>
-      const fireForm = document.getElementById('fireForm');
-      const fireSaved = document.getElementById('fireSaved');
-
-      function loadFireInfo() {
-        const data = JSON.parse(localStorage.getItem('fireData'));
-        if (!data) return;
-
-        fireSaved.innerHTML = `
-          <h3>Saved Info:</h3>
-          <ul>
-            <li><strong>Department:</strong> ${data.fireName}</li>
-            <li><strong>Phone:</strong> ${data.firePhone}</li>
-            <li><strong>Notes:</strong> ${data.fireNotes}</li>
-          </ul>
-        `;
-      }
-
-      fireForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const data = {
-          fireName: document.getElementById('fireName').value,
-          firePhone: document.getElementById('firePhone').value,
-          fireNotes: document.getElementById('fireNotes').value
-        };
-
-        localStorage.setItem('fireData', JSON.stringify(data));
-        loadFireInfo();
-        alert('Fire info saved locally!');
-      });
-
-      loadFireInfo();
-    </script>
-  </div>
+<body data-category="Fire">
+  <a href="index.html" class="back-link">&larr; Home</a>
+  <h1>Fire</h1>
+  <form id="entry-form">
+    <input type="text" id="entry-input" placeholder="Add new entry" required>
+    <button type="submit">Add</button>
+  </form>
+  <ul id="entries-list"></ul>
+  <script src="script.js"></script>
 </body>
 </html>
