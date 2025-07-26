@@ -1,19 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hospital - 112W VIP Portal</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hospital Log</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      background: #eee;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+
+    #entry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    #entry-input {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #f4f4f4;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
 </head>
-<body data-category="hospital">
+<body>
+
   <a href="index.html" class="back-link">&larr; Home</a>
   <h1>Hospital</h1>
+
   <form id="entry-form">
-    <input type="text" id="entry-input" placeholder="Add new entry" required>
+    <input type="text" id="entry-input" placeholder="Add new entry" required />
     <button type="submit">Add</button>
   </form>
+
   <ul id="entries-list"></ul>
-  <script src="script.js"></script>
+
+  <script>
+    document.getElementById('entry-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const input = document.getElementById('entry-input');
+      const text = input.value.trim();
+      if (text) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        document.getElementById('entries-list').appendChild(li);
+        input.value = '';
+      }
+    });
+  </script>
+
 </body>
 </html>
