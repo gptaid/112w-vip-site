@@ -1,145 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hospital Log</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 8px;
-      text-align: center;
-    }
-    table {
-      width: 100%;
-      margin-top: 20px;
-    }
-    h2 {
-      text-align: center;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 4px;
-      box-sizing: border-box;
-    }
-    textarea {
-      resize: vertical;
-    }
-    .back-btn {
-      margin-bottom: 20px;
-      display: inline-block;
-      padding: 6px 12px;
-      background-color: #ccc;
-      text-decoration: none;
-      border-radius: 4px;
-    }
-    button {
-      padding: 5px 12px;
-      margin: 5px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital - 112W VIP Portal</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-
-<a class="back-btn" href="index.html">← Back</a>
-
-<h2>HOSPITAL LOG</h2>
-
-<!-- Input Form -->
-<table>
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Patient Name</th>
-      <th>Condition</th>
-      <th>Treatment</th>
-      <th>Staff</th>
-      <th>Outcome</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><input type="date" id="date" /></td>
-      <td><input type="text" id="patient" /></td>
-      <td><input type="text" id="condition" /></td>
-      <td><textarea id="treatment" rows="2"></textarea></td>
-      <td><input type="text" id="staff" /></td>
-      <td><textarea id="outcome" rows="2"></textarea></td>
-    </tr>
-  </tbody>
-</table>
-
-<div style="text-align:center; margin-top:10px;">
-  <button onclick="addEntry()">Save</button>
-</div>
-
-<!-- Logged Entries Table -->
-<table id="hospitalLogTable">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Patient Name</th>
-      <th>Condition</th>
-      <th>Treatment</th>
-      <th>Staff</th>
-      <th>Outcome</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-
-<script>
-function addEntry() {
-  const table = document.getElementById("hospitalLogTable").getElementsByTagName('tbody')[0];
-  const date = document.getElementById("date").value;
-  const patient = document.getElementById("patient").value;
-  const condition = document.getElementById("condition").value;
-  const treatment = document.getElementById("treatment").value;
-  const staff = document.getElementById("staff").value;
-  const outcome = document.getElementById("outcome").value;
-
-  const row = table.insertRow();
-  row.innerHTML = `
-    <td>${date}</td>
-    <td>${patient}</td>
-    <td>${condition}</td>
-    <td>${treatment}</td>
-    <td>${staff}</td>
-    <td>${outcome}</td>
-    <td>
-      <button onclick="editRow(this)">Edit</button>
-      <button onclick="deleteRow(this)">Delete</button>
-    </td>
-  `;
-
-  document.getElementById("date").value = "";
-  document.getElementById("patient").value = "";
-  document.getElementById("condition").value = "";
-  document.getElementById("treatment").value = "";
-  document.getElementById("staff").value = "";
-  document.getElementById("outcome").value = "";
-}
-
-function editRow(btn) {
-  const row = btn.closest("tr").children;
-  document.getElementById("date").value = row[0].innerText;
-  document.getElementById("patient").value = row[1].innerText;
-  document.getElementById("condition").value = row[2].innerText;
-  document.getElementById("treatment").value = row[3].innerText;
-  document.getElementById("staff").value = row[4].innerText;
-  document.getElementById("outcome").value = row[5].innerText;
-  btn.closest("tr").remove();
-}
-
-function deleteRow(btn) {
-  btn.closest("tr").remove();
-}
-</script>
-
+<body data-category="Hospital">
+  <a href="index.html" class="back-link">&larr; Home</a>
+  <h1>Hospital</h1>
+  <form id="entry-form">
+    <input type="text" id="entry-input" placeholder="Add new entry" required>
+    <button type="submit">Add</button>
+  </form>
+  <ul id="entries-list"></ul>
+  <script src="script.js"></script>
 </body>
 </html>
