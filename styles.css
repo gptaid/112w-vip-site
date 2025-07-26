@@ -2,8 +2,8 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #6c91bf;
-color: #f0f0f0;
+  background-color: #f4f4f4; /* original light background */
+  color: #333;               /* original dark text */
 }
 h1 {
   text-align: center;
@@ -17,15 +17,17 @@ h1 {
   padding: 1rem;
 }
 .card {
-  background-color: #ffffff;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
   border-radius: 8px;
-  padding: 1.5rem;
-  width: 150px;
-  text-align: center;
   color: #333;
-  text-decoration: none;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.1s ease;
+}
+
+.card i {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #555;
 }
 .card:hover {
   transform: translateY(-4px);
