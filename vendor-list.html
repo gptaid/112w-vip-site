@@ -41,7 +41,10 @@
 
       function loadVendors() {
         const vendors = JSON.parse(localStorage.getItem('vendorList')) || [];
-        if (vendors.length === 0) return;
+        if (vendors.length === 0) {
+          vendorLog.innerHTML = "";
+          return;
+        }
 
         let html = `<h3>Saved Vendors:</h3><table border="1" cellpadding="5"><tr>
                       <th>Company</th>
@@ -50,21 +53,31 @@
                       <th>Position</th>
                       <th>Contact Number</th>
                       <th>NDA</th>
+                      <th>Actions</th>
                     </tr>`;
 
-        vendors.forEach(v => {
+        vendors.forEach((v, index) => {
           html += `<tr>
                     <td>${v.company}</td>
-                    <td>${v.firstname}</td>
+                    <td>${v.name}</td>
                     <td>${v.lastname}</td>
                     <td>${v.position}</td>
                     <td>${v.contact}</td>
                     <td>${v.nda}</td>
+                    <td>
+                      <button onclick="editVendor(${index})">Edit</button>
+                      <button onclick="deleteVendor(${index})">Delete</button>
+                    </td>
                   </tr>`;
         });
 
         html += `</table>`;
         vendorLog.innerHTML = html;
+      }
+
+      function saveVendors(vendors) {
+        localStorage.setItem('vendorList', JSON.stringify(vendors));
+        loadVendors();
       }
 
       form.addEventListener('submit', function(e) {
@@ -81,10 +94,30 @@
 
         const vendors = JSON.parse(localStorage.getItem('vendorList')) || [];
         vendors.push(newVendor);
-        localStorage.setItem('vendorList', JSON.stringify(vendors));
-        loadVendors();
+        saveVendors(vendors);
         form.reset();
       });
+
+      window.editVendor = function(index) {
+        const vendors = JSON.parse(localStorage.getItem('vendorList')) || [];
+        const v = vendors[index];
+
+        document.getElementById('company').value = v.company;
+        document.getElementById('name').value = v.name;
+        document.getElementById('lastname').value = v.lastname;
+        document.getElementById('position').value = v.position;
+        document.getElementById('contact').value = v.contact;
+        document.getElementById('nda').checked = v.nda === 'Signed';
+
+        vendors.splice(index, 1);
+        saveVendors(vendors);
+      };
+
+      window.deleteVendor = function(index) {
+        const vendors = JSON.parse(localStorage.getItem('vendorList')) || [];
+        vendors.splice(index, 1);
+        saveVendors(vendors);
+      };
 
       loadVendors();
     </script>
