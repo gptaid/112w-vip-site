@@ -3,77 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>112W VIP Log Dashboard</title>
+  <title>Guests & Visitors</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
       text-align: center;
-      padding: 40px;
-      background-color: #f5f5f5;
     }
-    h1 {
-      margin-bottom: 40px;
+    table {
+      width: 100%;
+      margin-top: 20px;
     }
-    .icon-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
-    }
-    .icon-item {
+    h2 {
       text-align: center;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+    }
+    .back-btn {
+      margin-bottom: 20px;
+      display: inline-block;
+      padding: 6px 12px;
+      background-color: #ccc;
       text-decoration: none;
-      color: black;
-    }
-    .icon-item img {
-      width: 100px;
-      height: 100px;
-    }
-    .icon-item span {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 16px;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
 
-  <h1>112W VIP LOG DASHBOARD</h1>
+<a class="back-btn" href="index.html">← Back</a>
 
-  <div class="icon-grid">
+<h2>GUESTS & VISITORS</h2>
 
-    <!-- Delivery Log -->
-    <a href="delivery-log.html" class="icon-item">
-      <img src="icons/delivery.png" alt="Delivery Log">
-      <span>Delivery Log</span>
-    </a>
-
-    <!-- Vendor List -->
-    <a href="vendor-list.html" class="icon-item">
-      <img src="icons/vendor.png" alt="Vendor List">
-      <span>Vendor List</span>
-    </a>
-
-    <!-- Hospital Log -->
-    <a href="hospital-log.html" class="icon-item">
-      <img src="icons/hospital.png" alt="Hospital Log">
-      <span>Hospital Log</span>
-    </a>
-
-    <!-- Camera Log -->
-    <a href="camera-log.html" class="icon-item">
-      <img src="icons/camera.png" alt="Camera Log">
-      <span>Camera Log</span>
-    </a>
-
-    <!-- Guest Log -->
-    <a href="guest-log.html" class="icon-item">
-      <img src="icons/guest.png" alt="Guests & Visitors">
-      <span>Guests & Visitors</span>
-    </a>
-
-  </div>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Lastname</th>
+      <th>Vehicle</th>
+      <th>Helpful Notes</th>
+    </tr>
+  </thead>
+  <tbody id="guestLogTable">
+    <tr>
+      <td><input type="text" placeholder="First Name" /></td>
+      <td><input type="text" placeholder="Last Name" /></td>
+      <td><input type="text" placeholder="Vehicle" /></td>
+      <td><textarea placeholder="Helpful Notes" rows="3"></textarea></td>
+    </tr>
+  </tbody>
+</table>
 
 </body>
 </html>
