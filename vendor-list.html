@@ -5,7 +5,7 @@
   <title>Vendor List</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-category="vendor-list">
   <div class="container">
     <a href="index.html" class="back-button">← Back</a>
     <h1>Vendor List 🧾</h1>
@@ -122,5 +122,12 @@
       loadVendors();
     </script>
   </div>
+
+  <form id="entry-form">
+    <input type="text" id="entry-input" placeholder="Add new entry" required>
+    <button type="submit">Add</button>
+  </form>
+  <ul id="entries-list"></ul>
+
 </body>
 </html>

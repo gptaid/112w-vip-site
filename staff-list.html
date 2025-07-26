@@ -48,7 +48,7 @@
     }
   </style>
 </head>
-<body>
+<body data-category="staff-list">
 
 <a class="back-btn" href="index.html">← Back</a>
 
@@ -210,6 +210,13 @@ function deleteStaff(btn) {
   btn.closest("tr").remove();
 }
 </script>
+
+
+  <form id="entry-form">
+    <input type="text" id="entry-input" placeholder="Add new entry" required>
+    <button type="submit">Add</button>
+  </form>
+  <ul id="entries-list"></ul>
 
 </body>
 </html>
