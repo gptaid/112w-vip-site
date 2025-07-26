@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Camera Log</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    input[type="text"], input[type="date"] {
+      width: 100%;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+    .back-btn {
+      margin-bottom: 20px;
+      display: inline-block;
+      padding: 6px 12px;
+      background-color: #ccc;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<a class="back-btn" href="index.html">← Back to Home</a>
+
+<h2>CAMERA LOG</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Camera #</th>
+      <th>Issue</th>
+      <th>Action Taken</th>
+      <th>Agent</th>
+      <th>Resolution</th>
+    </tr>
+  </thead>
+  <tbody id="cameraLogTable">
+    <tr>
+      <td><input type="date" /></td>
+      <td><input type="text" placeholder="Camera #" /></td>
+      <td><input type="text" placeholder="Issue" /></td>
+      <td><input type="text" placeholder="Action Taken" /></td>
+      <td><input type="text" placeholder="Agent" /></td>
+      <td><input type="text" placeholder="Resolution" /></td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
 
