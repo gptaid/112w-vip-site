@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delivery Log</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery Log</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body data-category="delivery-log">
-    <a class="back-link" href="index.html">&larr; Back</a>
-    <h2>Delivery Log</h2>
-    <form id="entry-form">
-        <input type="text" id="entry-input" placeholder="Add new entry" required>
-        <button type="submit">Add</button>
-    </form>
-    <ul id="entry-list"></ul>
-    <script src="script.js"></script>
+  <a class="back-link" href="index.html">&larr; Back</a>
+  <h2>Delivery Log</h2>
+  <!-- Form to add a new delivery entry -->
+  <form id="delivery-form" class="delivery-form">
+    <label>Date
+      <input type="date" id="date-input" required>
+    </label>
+    <label>Carrier
+      <input type="text" id="carrier-input" placeholder="Carrier" required>
+    </label>
+    <label>Delivery Type
+      <input type="text" id="type-input" placeholder="Delivery Type" required>
+    </label>
+<table id="delivery-table" class="delivery-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Carrier</th>
+        <th>Delivery Type</th>
+        <th>Sender</th>
+        <th>Recipient</th>
+        <th>Disposition</th>
+        <th>Agent</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Entries will be dynamically inserted here -->
+    </tbody>
+  </table>
+
+  <script src="delivery-log.js"></script>
+
+  
 </body>
 </html>
