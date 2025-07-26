@@ -1,19 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guest Log</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>112W VIP Log Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      margin-bottom: 40px;
+    }
+    .icon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    .icon-item {
+      text-align: center;
+      text-decoration: none;
+      color: black;
+    }
+    .icon-item img {
+      width: 100px;
+      height: 100px;
+    }
+    .icon-item span {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
 </head>
-<body data-category="guest-log">
-    <a class="back-link" href="index.html">&larr; Back</a>
-    <h2>Guest Log</h2>
-    <form id="entry-form">
-        <input type="text" id="entry-input" placeholder="Add new entry" required>
-        <button type="submit">Add</button>
-    </form>
-    <ul id="entry-list"></ul>
-    <script src="script.js"></script>
+<body>
+
+  <h1>112W VIP LOG DASHBOARD</h1>
+
+  <div class="icon-grid">
+
+    <!-- Delivery Log -->
+    <a href="delivery-log.html" class="icon-item">
+      <img src="icons/delivery.png" alt="Delivery Log">
+      <span>Delivery Log</span>
+    </a>
+
+    <!-- Vendor List -->
+    <a href="vendor-list.html" class="icon-item">
+      <img src="icons/vendor.png" alt="Vendor List">
+      <span>Vendor List</span>
+    </a>
+
+    <!-- Hospital Log -->
+    <a href="hospital-log.html" class="icon-item">
+      <img src="icons/hospital.png" alt="Hospital Log">
+      <span>Hospital Log</span>
+    </a>
+
+    <!-- Camera Log -->
+    <a href="camera-log.html" class="icon-item">
+      <img src="icons/camera.png" alt="Camera Log">
+      <span>Camera Log</span>
+    </a>
+
+    <!-- Guest Log -->
+    <a href="guest-log.html" class="icon-item">
+      <img src="icons/guest.png" alt="Guests & Visitors">
+      <span>Guests & Visitors</span>
+    </a>
+
+  </div>
+
 </body>
 </html>
