@@ -38,7 +38,7 @@
       border-radius: 4px;
     }
     button {
-      padding: 5px 10px;
+      padding: 4px 10px;
       margin: 2px;
     }
   </style>
@@ -49,7 +49,34 @@
 
 <h2>CAMERA LOG</h2>
 
+<!-- Form Row -->
 <table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Camera #</th>
+      <th>Issue</th>
+      <th>Action Taken</th>
+      <th>Agent</th>
+      <th>Resolution</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="date" id="date" /></td>
+      <td><input type="text" id="camera" /></td>
+      <td><input type="text" id="issue" /></td>
+      <td><textarea id="action" rows="2"></textarea></td>
+      <td><input type="text" id="agent" /></td>
+      <td><textarea id="resolution" rows="2"></textarea></td>
+      <td><button onclick="addEntry()">Save</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Saved Rows -->
+<table id="logTable">
   <thead>
     <tr>
       <th>Date</th>
@@ -61,39 +88,56 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody id="cameraLogTable">
-    <!-- Sample row -->
-    <tr>
-      <td><input type="date" /></td>
-      <td><input type="text" /></td>
-      <td><input type="text" /></td>
-      <td><textarea rows="2"></textarea></td>
-      <td><input type="text" /></td>
-      <td><textarea rows="2"></textarea></td>
-      <td>
-        <button onclick="saveRow(this)">Save</button>
-        <button onclick="editRow(this)">Edit</button>
-        <button onclick="deleteRow(this)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
+  <tbody></tbody>
 </table>
 
 <script>
-function saveRow(btn) {
-  const row = btn.closest("tr");
-  const inputs = row.querySelectorAll("input, textarea");
-  inputs.forEach(input => input.setAttribute("disabled", true));
+function addEntry() {
+  const table = document.getElementById("logTable").getElementsByTagName('tbody')[0];
+  const date = document.getElementById("date").value;
+  const camera = document.getElementById("camera").value;
+  const issue = document.getElementById("issue").value;
+  const action = document.getElementById("action").value;
+  const agent = document.getElementById("agent").value;
+  const resolution = document.getElementById("resolution").value;
+
+  const row = table.insertRow();
+  row.innerHTML = `
+    <td>${date}</td>
+    <td>${camera}</td>
+    <td>${issue}</td>
+    <td>${action}</td>
+    <td>${agent}</td>
+    <td>${resolution}</td>
+    <td>
+      <button onclick="editRow(this)">Edit</button>
+      <button onclick="deleteRow(this)">Delete</button>
+    </td>
+  `;
+
+  // Clear form
+  document.getElementById("date").value = "";
+  document.getElementById("camera").value = "";
+  document.getElementById("issue").value = "";
+  document.getElementById("action").value = "";
+  document.getElementById("agent").value = "";
+  document.getElementById("resolution").value = "";
 }
 
 function editRow(btn) {
-  const row = btn.closest("tr");
-  const inputs = row.querySelectorAll("input, textarea");
-  inputs.forEach(input => input.removeAttribute("disabled"));
+  const row = btn.parentElement.parentElement;
+  const cells = row.querySelectorAll("td");
+  document.getElementById("date").value = cells[0].innerText;
+  document.getElementById("camera").value = cells[1].innerText;
+  document.getElementById("issue").value = cells[2].innerText;
+  document.getElementById("action").value = cells[3].innerText;
+  document.getElementById("agent").value = cells[4].innerText;
+  document.getElementById("resolution").value = cells[5].innerText;
+  row.remove(); // Remove row to re-save after edit
 }
 
 function deleteRow(btn) {
-  const row = btn.closest("tr");
+  const row = btn.parentElement.parentElement;
   row.remove();
 }
 </script>
