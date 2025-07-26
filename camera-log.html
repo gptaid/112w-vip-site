@@ -21,10 +21,13 @@
     h2 {
       text-align: center;
     }
-    input[type="text"], input[type="date"] {
+    input, textarea {
       width: 100%;
       padding: 4px;
       box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
     }
     .back-btn {
       margin-bottom: 20px;
@@ -34,11 +37,15 @@
       text-decoration: none;
       border-radius: 4px;
     }
+    button {
+      padding: 5px 10px;
+      margin: 2px;
+    }
   </style>
 </head>
 <body>
 
-<a href="index.html" class="back-link">&larr; Back</a>
+<a class="back-btn" href="index.html">← Back</a>
 
 <h2>CAMERA LOG</h2>
 
@@ -51,20 +58,45 @@
       <th>Action Taken</th>
       <th>Agent</th>
       <th>Resolution</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody id="cameraLogTable">
+    <!-- Sample row -->
     <tr>
-  <td><input type="date" /></td>
-  <td><input type="text" placeholder="Camera #" /></td>
-  <td><input type="text" placeholder="Issue" /></td>
-  <td><textarea placeholder="Action Taken" rows="3"></textarea></td>
-  <td><input type="text" placeholder="Agent" /></td>
-  <td><textarea placeholder="Resolution" rows="3"></textarea></td>
+      <td><input type="date" /></td>
+      <td><input type="text" /></td>
+      <td><input type="text" /></td>
+      <td><textarea rows="2"></textarea></td>
+      <td><input type="text" /></td>
+      <td><textarea rows="2"></textarea></td>
+      <td>
+        <button onclick="saveRow(this)">Save</button>
+        <button onclick="editRow(this)">Edit</button>
+        <button onclick="deleteRow(this)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
 
+<script>
+function saveRow(btn) {
+  const row = btn.closest("tr");
+  const inputs = row.querySelectorAll("input, textarea");
+  inputs.forEach(input => input.setAttribute("disabled", true));
+}
+
+function editRow(btn) {
+  const row = btn.closest("tr");
+  const inputs = row.querySelectorAll("input, textarea");
+  inputs.forEach(input => input.removeAttribute("disabled"));
+}
+
+function deleteRow(btn) {
+  const row = btn.closest("tr");
+  row.remove();
+}
+</script>
+
 </body>
 </html>
-
