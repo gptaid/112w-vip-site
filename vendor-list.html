@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Vendor List</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-button">← Back</a>
+    <h1>Vendor List</h1>
+
+    <form id="vendorForm" class="delivery-form">
+      <label>Company</label>
+      <input type="text" id="company" required>
+
+      <label>Name</label>
+      <input type="text" id="name" required>
+
+      <label>Lastname</label>
+      <input type="text" id="lastname" required>
+
+      <label>Position</label>
+      <input type="text" id="position" required>
+
+      <label>Contact Number</label>
+      <input type="text" id="contact" required>
+
+      <label>NDA</label>
+      <input type="text" id="nda" required>
+
+      <button type="submit">Add Vendor</button>
+    </form>
+
+    <table id="vendorTable">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Name</th>
+          <th>Lastname</th>
+          <th>Position</th>
+          <th>Contact Number</th>
+          <th>NDA</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const form = document.getElementById('vendorForm');
+    const tableBody = document.querySelector('#vendorTable tbody');
+
+    function loadVendors() {
+      const vendors = JSON.parse(localStorage.getItem('vendors')) || [];
+      tableBody.innerHTML = '';
+      vendors.forEach(vendor => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${vendor.company}</td>
+          <td>${vendor.name}</td>
+          <td>${vendor.lastname}</td>
+          <td>${vendor.position}</td>
+          <td>${vendor.contact}</td>
+          <td>${vendor.nda}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const vendor = {
+        company: document.getElementById('company').value,
+        name: document.getElementById('name').value,
+        lastname: document.getElementById('lastname').value,
+        position: document.getElementById('position').value,
+        contact: document.getElementById('contact').value,
+        nda: document.getElementById('nda').value
+      };
+
+      const vendors = JSON.parse(localStorage.getItem('vendors')) || [];
+      vendors.push(vendor);
+      localStorage.setItem('vendors', JSON.stringify(vendors));
+      form.reset();
+      loadVendors();
+    });
+
+    loadVendors();
+  </script>
+</body>
+</html>
 
