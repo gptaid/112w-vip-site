@@ -9,7 +9,6 @@
 <body data-category="delivery-log">
   <a class="back-link" href="index.html">&larr; Back</a>
   <h2>Delivery Log</h2>
-  <!-- Form to add a new delivery entry -->
   <form id="delivery-form" class="delivery-form">
     <label>Date
       <input type="date" id="date-input" required>
@@ -20,7 +19,21 @@
     <label>Delivery Type
       <input type="text" id="type-input" placeholder="Delivery Type" required>
     </label>
-<table id="delivery-table" class="delivery-table">
+    <label>Sender
+      <input type="text" id="sender-input" placeholder="Sender" required>
+    </label>
+    <label>Recipient
+      <input type="text" id="recipient-input" placeholder="Recipient" required>
+    </label>
+    <label>Disposition
+      <input type="text" id="disposition-input" placeholder="Disposition" required>
+    </label>
+    <label>Agent
+      <input type="text" id="agent-input" placeholder="Agent" required>
+    </label>
+    <button type="submit">Add</button>
+  </form>
+  <table id="delivery-table" class="delivery-table">
     <thead>
       <tr>
         <th>Date</th>
@@ -37,9 +50,6 @@
       <!-- Entries will be dynamically inserted here -->
     </tbody>
   </table>
-
   <script src="delivery-log.js"></script>
-
-  
 </body>
 </html>
