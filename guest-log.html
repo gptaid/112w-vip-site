@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Guests & Visitors</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
+    body { font-family: Arial, sans-serif; margin: 20px; }
     table, th, td {
       border: 1px solid black;
       border-collapse: collapse;
@@ -24,7 +21,7 @@
     h2 {
       text-align: center;
     }
-    input[type="text"], textarea {
+    input, textarea {
       width: 100%;
       padding: 4px;
       box-sizing: border-box;
@@ -40,6 +37,10 @@
       text-decoration: none;
       border-radius: 4px;
     }
+    button {
+      padding: 4px 10px;
+      margin: 2px;
+    }
   </style>
 </head>
 <body>
@@ -48,6 +49,7 @@
 
 <h2>GUESTS & VISITORS</h2>
 
+<!-- Input Form -->
 <table>
   <thead>
     <tr>
@@ -55,17 +57,76 @@
       <th>Lastname</th>
       <th>Vehicle</th>
       <th>Helpful Notes</th>
+      <th>Action</th>
     </tr>
   </thead>
-  <tbody id="guestLogTable">
+  <tbody>
     <tr>
-      <td><input type="text" placeholder="First Name" /></td>
-      <td><input type="text" placeholder="Last Name" /></td>
-      <td><input type="text" placeholder="Vehicle" /></td>
-      <td><textarea placeholder="Helpful Notes" rows="3"></textarea></td>
+      <td><input type="text" id="name" placeholder="First Name" /></td>
+      <td><input type="text" id="lastname" placeholder="Last Name" /></td>
+      <td><input type="text" id="vehicle" placeholder="Vehicle" /></td>
+      <td><textarea id="notes" rows="2" placeholder="Helpful Notes"></textarea></td>
+      <td><button onclick="addGuest()">Save</button></td>
     </tr>
   </tbody>
 </table>
+
+<!-- Displayed Entries -->
+<table id="guestTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Lastname</th>
+      <th>Vehicle</th>
+      <th>Helpful Notes</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+function addGuest() {
+  const table = document.getElementById("guestTable").getElementsByTagName('tbody')[0];
+  const name = document.getElementById("name").value;
+  const lastname = document.getElementById("lastname").value;
+  const vehicle = document.getElementById("vehicle").value;
+  const notes = document.getElementById("notes").value;
+
+  const row = table.insertRow();
+  row.innerHTML = `
+    <td>${name}</td>
+    <td>${lastname}</td>
+    <td>${vehicle}</td>
+    <td>${notes}</td>
+    <td>
+      <button onclick="editGuest(this)">Edit</button>
+      <button onclick="deleteGuest(this)">Delete</button>
+    </td>
+  `;
+
+  // Clear form
+  document.getElementById("name").value = "";
+  document.getElementById("lastname").value = "";
+  document.getElementById("vehicle").value = "";
+  document.getElementById("notes").value = "";
+}
+
+function editGuest(btn) {
+  const row = btn.parentElement.parentElement;
+  const cells = row.querySelectorAll("td");
+  document.getElementById("name").value = cells[0].innerText;
+  document.getElementById("lastname").value = cells[1].innerText;
+  document.getElementById("vehicle").value = cells[2].innerText;
+  document.getElementById("notes").value = cells[3].innerText;
+  row.remove();
+}
+
+function deleteGuest(btn) {
+  const row = btn.parentElement.parentElement;
+  row.remove();
+}
+</script>
 
 </body>
 </html>
